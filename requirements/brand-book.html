@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brand Book — Charte Graphique</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #79C9C5;
+      --dark:    #3F9AAE;
+      --light:   #FFE2AF;
+      --accent:  #F96E5B;
+
+      --text-dark: #1a2e35;
+      --text-mid:  #4a6570;
+      --text-light: #ffffff;
+
+      --radius: 20px;
+      --gap: 2.5rem;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #f7f4ef;
+      color: var(--text-dark);
+      min-height: 100vh;
+    }
+
+    /* ── HERO ─────────────────────────────────── */
+    header {
+      background: var(--dark);
+      padding: 5rem 4rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 340px; height: 340px;
+      border-radius: 50%;
+      background: var(--primary);
+      opacity: .25;
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: 60px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: .18;
+    }
+
+    .hero-label {
+      font-size: .75rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--primary);
+      font-weight: 500;
+      margin-bottom: 1.2rem;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      color: #fff;
+      line-height: 1.1;
+      font-weight: 600;
+      max-width: 520px;
+    }
+
+    header p {
+      margin-top: 1.2rem;
+      color: rgba(255,255,255,.65);
+      font-size: 1rem;
+      font-weight: 300;
+      max-width: 400px;
+      line-height: 1.7;
+    }
+
+    /* ── MAIN ─────────────────────────────────── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem 6rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(0,0,0,.1);
+    }
+
+    /* ── GRID ─────────────────────────────────── */
+    .colors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--gap);
+    }
+
+    /* ── CARD ─────────────────────────────────── */
+    .card {
+      background: #fff;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,.06);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0,0,0,.12);
+    }
+
+    .card-swatch {
+      height: 160px;
+      position: relative;
+    }
+
+    .card-swatch .swatch-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.1rem 1.2rem;
+    }
+
+    .role-tag {
+      font-size: .68rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: .28rem .7rem;
+      border-radius: 99px;
+      background: rgba(255,255,255,.22);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.35);
+    }
+
+    /* dark swatch — white tag text already set */
+    .card[data-color="dark"] .role-tag {
+      background: rgba(255,255,255,.18);
+      color: #fff;
+    }
+
+    .card[data-color="light"] .role-tag {
+      background: rgba(0,0,0,.09);
+      color: var(--text-dark);
+      border-color: rgba(0,0,0,.12);
+    }
+
+    .card-body {
+      padding: 1.4rem 1.4rem 1.6rem;
+    }
+
+    .color-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: .9rem;
+      color: var(--text-dark);
+    }
+
+    .color-meta {
+      display: flex;
+      flex-direction: column;
+      gap: .45rem;
+    }
+
+    .meta-row {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+
+    .meta-label {
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      font-weight: 500;
+      min-width: 40px;
+    }
+
+    .meta-value {
+      font-size: .82rem;
+      font-weight: 400;
+      color: var(--text-dark);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .meta-value.css-var {
+      font-family: 'Courier New', monospace;
+      font-size: .78rem;
+      background: #f2f0eb;
+      padding: .15rem .5rem;
+      border-radius: 6px;
+      color: var(--dark);
+      font-weight: 500;
+    }
+
+    .divider {
+      height: 1px;
+      background: rgba(0,0,0,.06);
+      margin: 1rem 0;
+    }
+
+    .color-role {
+      font-size: .85rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ── USAGE SECTION ────────────────────────── */
+    .usage-section {
+      margin-top: 5rem;
+    }
+
+    .usage-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 640px) {
+      .usage-grid { grid-template-columns: 1fr; }
+      header { padding: 3rem 1.5rem 3rem; }
+    }
+
+    .usage-card {
+      border-radius: var(--radius);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .usage-card.hero-example {
+      background: var(--dark);
+      color: #fff;
+      grid-column: 1 / -1;
+    }
+
+    .usage-card.cta-example    { background: var(--light); }
+    .usage-card.badge-example  { background: #fff; border: 1px solid rgba(0,0,0,.07); }
+
+    .uc-label {
+      font-size: .7rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-weight: 500;
+      opacity: .55;
+    }
+
+    .uc-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: var(--primary);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .88rem;
+      font-weight: 500;
+      border: none;
+      border-radius: 99px;
+      padding: .65rem 1.4rem;
+      cursor: pointer;
+      width: fit-content;
+      letter-spacing: .02em;
+      transition: opacity .2s;
+    }
+    .btn-primary:hover { opacity: .88; }
+
+    .badge-accent {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: .72rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: .25rem .75rem;
+      border-radius: 99px;
+    }
+
+    .badge-primary {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      font-size: .72rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: .25rem .75rem;
+      border-radius: 99px;
+    }
+
+    .uc-body { font-size: .9rem; opacity: .75; line-height: 1.6; }
+
+    /* ── PALETTE BAND ─────────────────────────── */
+    .palette-band {
+      display: flex;
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-top: 5rem;
+      height: 72px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.08);
+    }
+    .palette-band span {
+      flex: 1;
+      transition: flex .35s ease;
+    }
+    .palette-band:hover span { flex: .6; }
+    .palette-band span:hover { flex: 2.2; }
+
+    /* ── FOOTER ───────────────────────────────── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,.5);
+      text-align: center;
+      padding: 2rem;
+      font-size: .8rem;
+      letter-spacing: .06em;
+    }
+    footer strong { color: rgba(255,255,255,.9); }
+  </style>
+</head>
+<body>
+
+<!-- ──────────── HERO ──────────── -->
+<header>
+  <p class="hero-label">Charte graphique · Couleurs</p>
+  <h1>Brand Book</h1>
+  <p>Une palette estivale, lumineuse et cohérente — conçue pour inspirer confiance et évoquer la chaleur de l'été.</p>
+</header>
+
+<!-- ──────────── MAIN ──────────── -->
+<main>
+
+  <h2 class="section-title">Couleurs principales</h2>
+
+  <div class="colors-grid">
+
+    <!-- PRIMARY -->
+    <div class="card" data-color="primary">
+      <div class="card-swatch" style="background: #79C9C5;">
+        <div class="swatch-inner">
+          <span class="role-tag">Couleur de marque</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="color-name">Primary</p>
+        <div class="color-meta">
+          <div class="meta-row">
+            <span class="meta-label">HEX</span>
+            <span class="meta-value">#79C9C5</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">RGB</span>
+            <span class="meta-value">121, 201, 197</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">CSS</span>
+            <span class="meta-value css-var">--primary</span>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <p class="color-role">Couleur signature de la marque. Utilisée pour les boutons d'action principaux, les CTA, les liens et tous les éléments interactifs clés.</p>
+      </div>
+    </div>
+
+    <!-- DARK -->
+    <div class="card" data-color="dark">
+      <div class="card-swatch" style="background: #3F9AAE;">
+        <div class="swatch-inner">
+          <span class="role-tag">Fonds sombres</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="color-name">Dark</p>
+        <div class="color-meta">
+          <div class="meta-row">
+            <span class="meta-label">HEX</span>
+            <span class="meta-value">#3F9AAE</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">RGB</span>
+            <span class="meta-value">63, 154, 174</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">CSS</span>
+            <span class="meta-value css-var">--dark</span>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <p class="color-role">Version profonde et saturée. Réservée aux sections à fort impact : hero, footer, barres de navigation, fonds de mise en avant.</p>
+      </div>
+    </div>
+
+    <!-- LIGHT -->
+    <div class="card" data-color="light">
+      <div class="card-swatch" style="background: #FFE2AF;">
+        <div class="swatch-inner">
+          <span class="role-tag">Fonds clairs</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="color-name">Light</p>
+        <div class="color-meta">
+          <div class="meta-row">
+            <span class="meta-label">HEX</span>
+            <span class="meta-value">#FFE2AF</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">RGB</span>
+            <span class="meta-value">255, 226, 175</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">CSS</span>
+            <span class="meta-value css-var">--light</span>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <p class="color-role">Teinte dorée et solaire. Idéale pour les fonds de sections alternées, les encarts informatifs et les backgrounds qui évoquent la douceur estivale.</p>
+      </div>
+    </div>
+
+    <!-- ACCENT -->
+    <div class="card" data-color="accent">
+      <div class="card-swatch" style="background: #F96E5B;">
+        <div class="swatch-inner">
+          <span class="role-tag">Accent</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="color-name">Accent</p>
+        <div class="color-meta">
+          <div class="meta-row">
+            <span class="meta-label">HEX</span>
+            <span class="meta-value">#F96E5B</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">RGB</span>
+            <span class="meta-value">249, 110, 91</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">CSS</span>
+            <span class="meta-value css-var">--accent</span>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <p class="color-role">Couleur de différenciation, vivante et percutante. Pour les badges, labels promotionnels, highlights, notifications et éléments à haute visibilité.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ──── PALETTE BAND ──── -->
+  <div class="palette-band" title="Survolez pour explorer">
+    <span style="background:#3F9AAE;"></span>
+    <span style="background:#79C9C5;"></span>
+    <span style="background:#FFE2AF;"></span>
+    <span style="background:#F96E5B;"></span>
+  </div>
+
+  <!-- ──── USAGE EXAMPLES ──── -->
+  <div class="usage-section">
+    <h2 class="section-title">Exemples d'utilisation</h2>
+
+    <div class="usage-grid">
+
+      <!-- Hero example -->
+      <div class="usage-card hero-example">
+        <span class="uc-label">Hero · Footer</span>
+        <p class="uc-title">Découvrez notre univers estival</p>
+        <p class="uc-body">La couleur Dark (#3F9AAE) crée des sections immersives avec une présence affirmée — parfaite pour l'accroche principale du site.</p>
+        <button class="btn-primary">Voir la collection →</button>
+      </div>
+
+      <!-- CTA / Light background -->
+      <div class="usage-card cta-example">
+        <span class="uc-label">Section · Background</span>
+        <p class="uc-title" style="color:var(--text-dark);">Une ambiance chaleureuse</p>
+        <p class="uc-body" style="color:var(--text-mid);">Le fond Light (#FFE2AF) apporte douceur et respiration aux sections de contenu.</p>
+        <button class="btn-primary">En savoir plus</button>
+      </div>
+
+      <!-- Badges -->
+      <div class="usage-card badge-example">
+        <span class="uc-label">Labels · Badges · Tags</span>
+        <p class="uc-title">Différenciez vos éléments</p>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.4rem;">
+          <span class="badge-accent">Nouveauté</span>
+          <span class="badge-accent">Promo</span>
+          <span class="badge-primary">Populaire</span>
+          <span class="badge-primary">Été 2025</span>
+        </div>
+        <p class="uc-body" style="margin-top:.6rem;">L'Accent (#F96E5B) capte immédiatement l'œil pour signaler promotions et nouveautés.</p>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<!-- ──────────── FOOTER ──────────── -->
+<footer>
+  <strong>Brand Book</strong> · Palette estivale · Tous droits réservés
+</footer>
+
+</body>
+</html>

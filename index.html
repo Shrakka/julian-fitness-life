@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Julian Fitness Life — Coach Sportif à Vincennes et ses alentours</title>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#79C9C5',
+            dark:    '#3F9AAE',
+            light:   '#FFE2AF',
+            accent:  '#F96E5B',
+            ink:     '#1a2e35',
+            muted:   '#4a6570',
+          },
+          fontFamily: {
+            display: ['"Archivo Black"', 'sans-serif'],
+            body:    ['Outfit', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Outfit', sans-serif; background: #f7f4ef; color: #1a2e35; overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 2.5rem;
+      background: rgba(63,154,174,0.92);
+      backdrop-filter: blur(14px);
+      transition: background .3s;
+    }
+    .nav-logo {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 1.1rem; color: #fff; letter-spacing: .02em;
+      text-decoration: none;
+    }
+    .nav-logo span { color: #FFE2AF; }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a {
+      font-size: .82rem; font-weight: 500; letter-spacing: .06em;
+      text-transform: uppercase; color: rgba(255,255,255,.75);
+      text-decoration: none; transition: color .2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta {
+      background: #F96E5B; color: #fff;
+      font-family: 'Outfit', sans-serif; font-size: .82rem; font-weight: 600;
+      border: none; border-radius: 99px; padding: .5rem 1.3rem;
+      cursor: pointer; text-decoration: none; letter-spacing: .03em;
+      transition: all .2s;
+    }
+    .nav-cta:hover { background: #e05848; transform: translateY(-1px); }
+
+    /* ── BUTTONS (from UI Kit) ── */
+    .btn-primary-lg {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: #79C9C5; color: #fff;
+      font-family: 'Outfit', sans-serif; font-weight: 600;
+      border: none; border-radius: 99px; cursor: pointer;
+      letter-spacing: .02em; font-size: 1rem; padding: .85rem 2rem;
+      transition: all .2s ease; text-decoration: none;
+    }
+    .btn-primary-lg:hover { background: #5bb8b3; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(121,201,197,.4); }
+
+    .btn-secondary-lg {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: transparent; color: #fff;
+      font-family: 'Outfit', sans-serif; font-weight: 600;
+      border: 2px solid rgba(255,255,255,.6); border-radius: 99px; cursor: pointer;
+      letter-spacing: .02em; font-size: 1rem; padding: .78rem 1.9rem;
+      transition: all .2s ease; text-decoration: none;
+    }
+    .btn-secondary-lg:hover { background: rgba(255,255,255,.12); border-color: #fff; transform: translateY(-2px); }
+
+    /* ── SECTION LABEL (from UI Kit) ── */
+    .section-label {
+      display: inline-flex; align-items: center; gap: .7rem;
+      font-family: 'Outfit', sans-serif; font-size: .7rem;
+      font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+      color: #3F9AAE;
+    }
+    .section-label::before {
+      content: ''; display: block; width: 28px; height: 2px;
+      background: #79C9C5; border-radius: 99px; flex-shrink: 0;
+    }
+    .section-label-light { color: #79C9C5; }
+    .section-label-light::before { background: #79C9C5; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #3F9AAE 0%, #2a7a8e 55%, #1a2e35 100%);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 8rem 2.5rem 5rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-blob1 {
+      position: absolute; top: -120px; right: -80px;
+      width: 520px; height: 520px; border-radius: 50%;
+      background: #79C9C5; opacity: .12;
+    }
+    .hero-blob2 {
+      position: absolute; bottom: -80px; left: -60px;
+      width: 320px; height: 320px; border-radius: 50%;
+      background: #F96E5B; opacity: .12;
+    }
+    .hero-blob3 {
+      position: absolute; top: 40%; right: 10%;
+      width: 180px; height: 180px; border-radius: 50%;
+      background: #FFE2AF; opacity: .08;
+    }
+    .hero-content { max-width: 680px; position: relative; z-index: 2; }
+    .hero-eyebrow {
+      font-family: 'Outfit', sans-serif; font-size: .72rem;
+      letter-spacing: .22em; text-transform: uppercase; font-weight: 600;
+      color: #79C9C5; margin-bottom: 1.4rem;
+      display: flex; align-items: center; gap: .7rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; width: 28px; height: 2px;
+      background: #79C9C5; border-radius: 99px;
+    }
+    .hero h1 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      color: #fff; line-height: 1.02; letter-spacing: -.01em;
+      margin-bottom: 1.6rem;
+    }
+    .hero h1 em { color: #FFE2AF; font-style: normal; }
+    .hero-sub {
+      font-family: 'Outfit', sans-serif; font-weight: 300;
+      font-size: 1.1rem; color: rgba(255,255,255,.7);
+      line-height: 1.75; max-width: 500px; margin-bottom: 2.5rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: .5rem;
+      font-size: .68rem; letter-spacing: .15em; text-transform: uppercase;
+      color: rgba(255,255,255,.35); z-index: 2;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+    .hero-scroll svg { opacity: .4; }
+
+    /* ── TRUST BAR (from UI Kit) ── */
+    .trust-item { display: flex; align-items: flex-start; gap: .9rem; }
+    .trust-bar-line { width: 3px; height: 44px; border-radius: 99px; flex-shrink: 0; margin-top: .1rem; }
+    .trust-title { font-family: 'Outfit', sans-serif; font-size: .88rem; font-weight: 700; color: #1a2e35; line-height: 1.2; margin-bottom: .18rem; }
+    .trust-sub { font-family: 'Outfit', sans-serif; font-size: .78rem; color: #4a6570; font-weight: 300; line-height: 1.4; }
+
+    /* ── CARDS (from UI Kit) ── */
+    .ui-card {
+      background: #fff; border-radius: 20px; overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,.07);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .ui-card:hover { transform: translateY(-6px); box-shadow: 0 14px 40px rgba(0,0,0,.13); }
+    .card-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: flex; align-items: center; justify-content: center; }
+    .card-tag { font-size: .67rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: #F96E5B; display: block; margin-bottom: .5rem; }
+    .card-title { font-family: 'Archivo Black', sans-serif; font-size: 1.05rem; color: #1a2e35; line-height: 1.25; margin-bottom: .6rem; }
+    .card-desc { font-family: 'Outfit', sans-serif; font-size: .87rem; color: #4a6570; line-height: 1.65; font-weight: 300; }
+
+    /* ── PROGRAMME PILLS ── */
+    .prog-pill {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(121,201,197,.12); border-radius: 99px;
+      padding: .45rem 1rem; font-size: .8rem; font-weight: 500; color: #3F9AAE;
+      border: 1px solid rgba(121,201,197,.3);
+    }
+    .prog-pill-accent {
+      background: rgba(249,110,91,.1); color: #F96E5B;
+      border-color: rgba(249,110,91,.25);
+    }
+
+    /* ── VALEURS ── */
+    .valeur-card {
+      background: #fff; border-radius: 20px; padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.05);
+      transition: transform .2s;
+    }
+    .valeur-card:hover { transform: translateY(-4px); }
+    .valeur-icon {
+      width: 48px; height: 48px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 1rem;
+    }
+    .valeur-title { font-family: 'Archivo Black', sans-serif; font-size: .95rem; color: #1a2e35; margin-bottom: .5rem; }
+    .valeur-desc { font-size: .84rem; color: #4a6570; line-height: 1.6; font-weight: 300; }
+
+    /* ── OBJECTIFS grid ── */
+    .objectif-item {
+      display: flex; align-items: flex-start; gap: .9rem;
+      padding: 1.4rem; background: #fff; border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.05);
+      transition: transform .2s;
+    }
+    .objectif-item:hover { transform: translateX(4px); }
+    .obj-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      flex-shrink: 0; margin-top: .35rem;
+    }
+    .obj-label { font-family: 'Archivo Black', sans-serif; font-size: .9rem; color: #1a2e35; margin-bottom: .25rem; }
+    .obj-desc { font-size: .8rem; color: #4a6570; font-weight: 300; line-height: 1.5; }
+
+    /* ── CONTACT ── */
+    .contact-item {
+      display: flex; align-items: center; gap: 1rem;
+      background: rgba(255,255,255,.1); border-radius: 16px;
+      padding: 1.1rem 1.4rem; text-decoration: none;
+      transition: background .2s, transform .2s;
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .contact-item:hover { background: rgba(255,255,255,.18); transform: translateX(4px); }
+    .contact-icon {
+      width: 42px; height: 42px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .contact-label { font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 600; color: rgba(255,255,255,.45); margin-bottom: .15rem; }
+    .contact-value { font-size: .95rem; font-weight: 500; color: #fff; }
+
+    /* ── RAINBOW BAR ── */
+    .rainbow-bar {
+      height: 5px;
+      background: linear-gradient(90deg, #F96E5B, #FFE2AF, #79C9C5, #3F9AAE, #F96E5B);
+      background-size: 200% 100%;
+      animation: rainbowMove 4s linear infinite;
+    }
+    @keyframes rainbowMove {
+      0% { background-position: 0% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    /* ── SECTION separators ── */
+    section { padding: 6rem 2.5rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    /* ── FADE IN ANIMATIONS ── */
+    .fade-in { opacity: 0; transform: translateY(24px); animation: fadeUp .7s ease forwards; }
+    .fade-in-1 { animation-delay: .1s; }
+    .fade-in-2 { animation-delay: .25s; }
+    .fade-in-3 { animation-delay: .4s; }
+    .fade-in-4 { animation-delay: .55s; }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: .9rem 1.2rem; }
+      .nav-links { display: none; }
+      .hero { padding: 7rem 1.2rem 5rem; }
+      section { padding: 3.5rem 1.2rem; }
+      .section-inner { padding: 0; }
+
+      /* Trust bar : 1 colonne */
+      .trust-grid { grid-template-columns: 1fr !important; gap: 1.4rem !important; }
+
+      /* Séances : 1 colonne */
+      .seances-grid { grid-template-columns: 1fr !important; }
+
+      /* À propos : stack vertical */
+      .apropos-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+
+      /* À propos : badge flottant ne déborde plus */
+      .apropos-badge {
+        position: static !important;
+        display: inline-flex !important;
+        margin-top: 1rem;
+        border-radius: 99px !important;
+        padding: .6rem 1.2rem !important;
+      }
+      .apropos-badge p:first-child { font-size: 1rem !important; }
+
+      /* Objectifs : stack vertical */
+      .objectifs-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+
+      /* Contact : stack vertical */
+      .contact-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+
+      /* Valeurs : 1 colonne */
+      .valeurs-grid { grid-template-columns: 1fr !important; }
+
+      /* Boutons hero : colonne */
+      .hero-actions { flex-direction: column; align-items: flex-start; gap: .8rem; }
+      .btn-primary-lg, .btn-secondary-lg { width: 100%; justify-content: center; }
+
+      /* Footer : centré */
+      .footer-inner { flex-direction: column !important; align-items: center !important; text-align: center !important; gap: .8rem !important; }
+
+      /* Textes cartes plus lisibles */
+      .card-title { font-size: 1.15rem !important; }
+      .card-desc  { font-size: .93rem !important; }
+      .obj-label  { font-size: 1rem !important; }
+      .obj-desc   { font-size: .87rem !important; }
+      .trust-title { font-size: .95rem !important; }
+      .trust-sub   { font-size: .84rem !important; }
+      .valeur-title { font-size: 1rem !important; }
+      .valeur-desc  { font-size: .9rem !important; }
+      .contact-value { font-size: 1rem !important; }
+    }
+
+    @media (max-width: 768px) {
+      .trust-section { padding: 2.5rem 1.2rem !important; }
+    }
+
+    @media (max-width: 420px) {
+      .hero h1 { font-size: 2.4rem; }
+      .btn-primary-lg, .btn-secondary-lg { font-size: .92rem; padding: .75rem 1.4rem; }
+    }  </style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav>
+  <a href="#" class="nav-logo">Julian <span>Fitness</span> Life</a>
+  <div class="nav-links">
+    <a href="#apropos">À propos</a>
+    <a href="#seances">Séances</a>
+    <a href="#objectifs">Objectifs</a>
+    <a href="#valeurs">Valeurs</a>
+    <a href="#contact" class="nav-cta">Me contacter</a>
+  </div>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<div class="hero">
+  <div class="hero-blob1"></div>
+  <div class="hero-blob2"></div>
+  <div class="hero-blob3"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow fade-in fade-in-1">Coach sportif certifié à Vincennes</p>
+    <h1 class="fade-in fade-in-2">
+      Faites du sport<br>
+      <em>à votre rythme.</em>
+    </h1>
+    <p class="hero-sub fade-in fade-in-3">
+      Quel que soit votre niveau, votre forme ou votre histoire —
+      le sport est fait pour vous. Julian vous accompagne avec bienveillance,
+      technique et bonne humeur.
+      <br><br>
+      Sur Paris et ses environs, à domicile ou en extérieur.
+    </p>
+
+    <div class="hero-actions fade-in fade-in-4">
+      <a href="#contact" class="btn-primary-lg">Démarrer maintenant →</a>
+      <a href="#seances" class="btn-secondary-lg">Voir les séances</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
+      <rect x="1" y="1" width="14" height="22" rx="7" stroke="white" stroke-width="1.5"/>
+      <circle cx="8" cy="7" r="2" fill="white">
+        <animate attributeName="cy" values="7;14;7" dur="1.8s" repeatCount="indefinite"/>
+      </circle>
+    </svg>
+    Défiler
+  </div>
+</div>
+
+<!-- ═══════════ TRUST BAR ═══════════ -->
+<section class="trust-section" style="padding: 3rem 2.5rem; background: #fff;">
+  <div class="section-inner">
+    <div class="trust-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 2rem;">
+
+      <div class="trust-item">
+        <div class="trust-bar-line" style="background:#79C9C5;"></div>
+        <div>
+          <p class="trust-title">Tous niveaux</p>
+          <p class="trust-sub">Débutant, intermédiaire ou confirmé — bienvenu(e)</p>
+        </div>
+      </div>
+
+      <div class="trust-item">
+        <div class="trust-bar-line" style="background:#F96E5B;"></div>
+        <div>
+          <p class="trust-title">100 % inclusif</p>
+          <p class="trust-sub">LGBT friendly, sans jugement, bienveillant</p>
+        </div>
+      </div>
+
+      <div class="trust-item">
+        <div class="trust-bar-line" style="background:#3F9AAE;"></div>
+        <div>
+          <p class="trust-title">Coaching sécurisé</p>
+          <p class="trust-sub">Postures, gestes et progression maîtrisés</p>
+        </div>
+      </div>
+
+      <div class="trust-item">
+        <div class="trust-bar-line" style="background:#FFE2AF;"></div>
+        <div>
+          <p class="trust-title">Disponibilités flexibles</p>
+          <p class="trust-sub">À domicile ou en extérieur, horaires adaptés</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ À PROPOS ═══════════ -->
+<section id="apropos" style="background: #f7f4ef;">
+  <div class="section-inner">
+    <div class="apropos-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;">
+
+      <div>
+        <span class="section-label" style="margin-bottom: 1.2rem; display:inline-flex;">Coach sportif</span>
+        <h2 style="font-family:'Archivo Black',sans-serif; font-size:clamp(1.9rem,3.5vw,2.8rem); color:#1a2e35; line-height:1.1; margin-bottom:1.4rem;">
+          Le sport, pour<br>tout le monde.
+        </h2>
+        <p style="font-weight:300; font-size:1rem; color:#4a6570; line-height:1.8; margin-bottom:1.2rem;">
+          Je m'appelle Julian. Coach sportif passionné, je crois profondément que le mouvement est un droit, pas un privilège. Mon approche ? Vous faire bouger avec plaisir, dans le respect de votre corps et à votre propre rythme.
+        </p>
+        <p style="font-weight:300; font-size:1rem; color:#4a6570; line-height:1.8; margin-bottom:2rem;">
+          Que vous souhaitiez vous remettre en forme, renforcer votre corps, gagner en endurance ou simplement vous sentir mieux dans votre peau — je suis là, avec vous, pas au-dessus de vous.
+        </p>
+        <div style="display:flex; flex-wrap:wrap; gap:.6rem;">
+          <span class="prog-pill">🌈 LGBT Friendly</span>
+          <span class="prog-pill">✊ Sport pour tous</span>
+          <span class="prog-pill prog-pill-accent">Good Vibes Only</span>
+        </div>
+      </div>
+
+      <div style="position:relative; padding-bottom: 2rem;">
+        <div style="background:linear-gradient(135deg, #3F9AAE, #79C9C5); border-radius:24px; aspect-ratio:3/4; display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative;">
+          <div style="position:absolute; top:-40px; right:-40px; width:180px; height:180px; border-radius:50%; background:#FFE2AF; opacity:.2;"></div>
+          <div style="position:absolute; bottom:-30px; left:-30px; width:130px; height:130px; border-radius:50%; background:#F96E5B; opacity:.2;"></div>
+          <div style="text-align:center; position:relative; z-index:2;">
+            <div style="font-size:5rem; margin-bottom:1rem;">🏃</div>
+            <p style="font-family:'Archivo Black',sans-serif; font-size:1.6rem; color:#fff; line-height:1.1;">Julian<br>Fitness Life</p>
+            <p style="font-size:.8rem; color:rgba(255,255,255,.6); margin-top:.6rem; font-weight:300;">Coach sportif certifié à Vincennes</p>
+          </div>
+        </div>
+        <!-- floating badge -->
+        <div class="apropos-badge" style="position:absolute; bottom:-1.5rem; right:-1.5rem; background:#F96E5B; color:#fff; border-radius:16px; padding:1rem 1.2rem; box-shadow:0 8px 24px rgba(249,110,91,.35);">
+          <p style="font-family:'Archivo Black',sans-serif; font-size:1.4rem; line-height:1;">100%</p>
+          <p style="font-size:.72rem; font-weight:500; opacity:.85; letter-spacing:.05em; text-transform:uppercase;">Inclusif</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SÉANCES ═══════════ -->
+<section id="seances" style="background:#fff;">
+  <div class="section-inner">
+    <div style="text-align:center; margin-bottom:3.5rem;">
+      <span class="section-label" style="justify-content:center; margin-bottom:1rem; display:inline-flex;">Mes offres</span>
+      <h2 style="font-family:'Archivo Black',sans-serif; font-size:clamp(1.9rem,3.5vw,2.8rem); color:#1a2e35; line-height:1.1;">Comment on s'entraîne ?</h2>
+      <p style="font-weight:300; color:#4a6570; margin-top:.8rem; max-width:480px; margin-inline:auto; line-height:1.7;">Des formats adaptés à votre vie, votre emploi du temps et vos objectifs.</p>
+    </div>
+
+    <div class="seances-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); gap:1.8rem;">
+
+      <!-- Carte Individuel -->
+      <div class="ui-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#79C9C5,#3F9AAE); height:200px;">
+          <div style="text-align:center;">
+            <div style="font-size:3.5rem; margin-bottom:.5rem;">🎯</div>
+            <p style="font-family:'Archivo Black',sans-serif; color:#fff; font-size:1rem;">1-pour-1</p>
+          </div>
+        </div>
+        <div style="padding:1.4rem 1.5rem 1rem;">
+          <span class="card-tag">Coaching individuel</span>
+          <h3 class="card-title">Séance personnalisée</h3>
+          <p class="card-desc">Programme 100 % taillé pour vous. On travaille vos objectifs, votre morphologie et vos contraintes. Progression garantie, à votre rythme.</p>
+        </div>
+        <div style="padding:.5rem 1.5rem 1.5rem; display:flex; flex-wrap:wrap; gap:.5rem;">
+          <span class="prog-pill" style="font-size:.72rem;">À domicile</span>
+          <span class="prog-pill" style="font-size:.72rem;">En extérieur</span>
+          <span class="prog-pill prog-pill-accent" style="font-size:.72rem;">Sur mesure</span>
+        </div>
+      </div>
+
+      <!-- Carte Groupe -->
+      <div class="ui-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#FFE2AF,#F9C97B); height:200px;">
+          <div style="text-align:center;">
+            <div style="font-size:3.5rem; margin-bottom:.5rem;">🤝</div>
+            <p style="font-family:'Archivo Black',sans-serif; color:#1a2e35; font-size:1rem;">Ensemble</p>
+          </div>
+        </div>
+        <div style="padding:1.4rem 1.5rem 1rem;">
+          <span class="card-tag">Coaching groupe</span>
+          <h3 class="card-title">Séance collective</h3>
+          <p class="card-desc">Entraînez-vous avec d'autres, dans une ambiance bienveillante et motivante. L'énergie du groupe booste vos performances et votre motivation.</p>
+        </div>
+        <div style="padding:.5rem 1.5rem 1.5rem; display:flex; flex-wrap:wrap; gap:.5rem;">
+          <span class="prog-pill" style="font-size:.72rem;">Bonne humeur</span>
+          <span class="prog-pill" style="font-size:.72rem;">Équité</span>
+          <span class="prog-pill prog-pill-accent" style="font-size:.72rem;">Inclusif</span>
+        </div>
+      </div>
+
+      <!-- Carte Lieux -->
+      <div class="ui-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#F96E5B,#e05040); height:200px;">
+          <div style="text-align:center;">
+            <div style="font-size:3.5rem; margin-bottom:.5rem;">📍</div>
+            <p style="font-family:'Archivo Black',sans-serif; color:#fff; font-size:1rem;">Partout</p>
+          </div>
+        </div>
+        <div style="padding:1.4rem 1.5rem 1rem;">
+          <span class="card-tag">Lieux & horaires</span>
+          <h3 class="card-title">Flexible & accessible</h3>
+          <p class="card-desc">Je me déplace chez vous, ou on se retrouve en extérieur. Disponibilités larges pour s'adapter à votre emploi du temps. À Vincennes et ses environs : Paris, Saint Mandé, Montreuil...</p>
+        </div>
+        <div style="padding:.5rem 1.5rem 1.5rem; display:flex; flex-wrap:wrap; gap:.5rem;">
+          <span class="prog-pill" style="font-size:.72rem;">🏠 Domicile</span>
+          <span class="prog-pill" style="font-size:.72rem;">🌳 Extérieur</span>
+          <span class="prog-pill prog-pill-accent" style="font-size:.72rem;">Disponible</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ OBJECTIFS ═══════════ -->
+<section id="objectifs" style="background:#f7f4ef;">
+  <div class="section-inner">
+
+    <div class="objectifs-grid" style="display:grid; grid-template-columns:1fr 1.4fr; gap:4rem; align-items:start;">
+
+      <div>
+        <span class="section-label" style="margin-bottom:1.2rem; display:inline-flex;">Ce qu'on travaille</span>
+        <h2 style="font-family:'Archivo Black',sans-serif; font-size:clamp(1.9rem,3.5vw,2.8rem); color:#1a2e35; line-height:1.1; margin-bottom:1.2rem;">
+          Vos objectifs,<br>nos priorités.
+        </h2>
+        <p style="font-weight:300; font-size:.98rem; color:#4a6570; line-height:1.8;">
+          Chaque séance est construite autour de ce qui compte pour vous. Pas de programme générique — une approche personnalisée, centrée sur votre progression et votre ressenti.
+        </p>
+        <div style="margin-top:2rem; background:#3F9AAE; border-radius:20px; padding:1.6rem 1.8rem;">
+          <p style="font-family:'Archivo Black',sans-serif; color:#fff; font-size:1rem; margin-bottom:.5rem;">💬 Julian vous dit :</p>
+          <p style="font-weight:300; font-size:.9rem; color:rgba(255,255,255,.8); line-height:1.7; font-style:italic;">"Je ne veux pas juste vous faire transpirer. Je veux que vous repartiez avec un bon ressenti musculaire, une technique solide et le sourire."</p>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:.9rem;">
+
+        <div class="objectif-item">
+          <div class="obj-dot" style="background:#79C9C5;"></div>
+          <div>
+            <p class="obj-label">Bien-être & sérénité</p>
+            <p class="obj-desc">Réduire le stress, retrouver de l'énergie au quotidien, se sentir bien dans son corps et sa tête.</p>
+          </div>
+        </div>
+
+        <div class="objectif-item">
+          <div class="obj-dot" style="background:#F96E5B;"></div>
+          <div>
+            <p class="obj-label">Remise en forme</p>
+            <p class="obj-desc">Reprendre une activité physique en douceur, retrouver un souffle et une vitalité durables.</p>
+          </div>
+        </div>
+
+        <div class="objectif-item">
+          <div class="obj-dot" style="background:#3F9AAE;"></div>
+          <div>
+            <p class="obj-label">Renforcement musculaire</p>
+            <p class="obj-desc">Tonifier, sculpter, gagner en force — avec des postures sûres et un travail musculaire ciblé.</p>
+          </div>
+        </div>
+
+        <div class="objectif-item">
+          <div class="obj-dot" style="background:#FFE2AF;"></div>
+          <div>
+            <p class="obj-label">Endurance & cardio</p>
+            <p class="obj-desc">Améliorer votre capacité cardio-vasculaire, courir plus longtemps, dépasser vos limites progressivement.</p>
+          </div>
+        </div>
+
+        <div class="objectif-item">
+          <div class="obj-dot" style="background:#79C9C5;"></div>
+          <div>
+            <p class="obj-label">Se dépasser en sécurité</p>
+            <p class="obj-desc">Aller plus loin, mais jamais au détriment de votre corps. Progression guidée, gestes techniques maîtrisés.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ VALEURS ═══════════ -->
+<section id="valeurs" style="background:#3F9AAE;">
+  <div class="section-inner">
+
+    <div style="text-align:center; margin-bottom:3.5rem;">
+      <span class="section-label section-label-light" style="justify-content:center; margin-bottom:1rem; display:inline-flex; color:#79C9C5;">Mon état d'esprit</span>
+      <h2 style="font-family:'Archivo Black',sans-serif; font-size:clamp(1.9rem,3.5vw,2.8rem); color:#fff; line-height:1.1;">Les valeurs qui me guident.</h2>
+    </div>
+
+    <div class="valeurs-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr)); gap:1.5rem;">
+
+      <div class="valeur-card">
+        <div class="valeur-icon" style="background:rgba(121,201,197,.15);">🌈</div>
+        <p class="valeur-title">Inclusivité</p>
+        <p class="valeur-desc">LGBT friendly, ouvert à tous les corps, tous les âges, toutes les origines. Ici, personne n'est jugé.</p>
+      </div>
+
+      <div class="valeur-card">
+        <div class="valeur-icon" style="background:rgba(249,110,91,.1);">⚡</div>
+        <p class="valeur-title">Good Vibes</p>
+        <p class="valeur-desc">Le sport doit être fun. On s'entraîne sérieusement mais sans se prendre au sérieux. Bonne humeur garantie.</p>
+      </div>
+
+      <div class="valeur-card">
+        <div class="valeur-icon" style="background:rgba(63,154,174,.1);">🛡️</div>
+        <p class="valeur-title">Sécurité</p>
+        <p class="valeur-desc">Chaque mouvement est enseigné avec technique. Votre santé passe avant la performance.</p>
+      </div>
+
+      <div class="valeur-card">
+        <div class="valeur-icon" style="background:rgba(255,226,175,.4);">✊</div>
+        <p class="valeur-title">Égalité</p>
+        <p class="valeur-desc">Aucun profil n'est privilégié. Même engagement, même qualité pour chaque personne que j'accompagne.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<section id="contact" style="background:linear-gradient(160deg, #1a2e35 0%, #2a4a55 100%);">
+  <div class="section-inner">
+
+    <div class="contact-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;">
+
+      <div>
+        <span class="section-label section-label-light" style="margin-bottom:1.2rem; display:inline-flex;">Prêt(e) à démarrer ?</span>
+        <h2 style="font-family:'Archivo Black',sans-serif; font-size:clamp(1.9rem,3.5vw,2.8rem); color:#fff; line-height:1.1; margin-bottom:1.2rem;">
+          Parlons de<br>vos objectifs.
+        </h2>
+        <p style="font-weight:300; font-size:1rem; color:rgba(255,255,255,.6); line-height:1.8; margin-bottom:2rem;">
+          Première séance découverte, question sur les formules ou envie de simplement discuter ? Contactez-moi par le moyen qui vous convient le mieux.
+        </p>
+        <div style="display:flex; flex-wrap:wrap; gap:.6rem; margin-bottom:2rem;">
+          <span class="prog-pill" style="background:rgba(255,255,255,.08); color:rgba(255,255,255,.7); border-color:rgba(255,255,255,.15);">Réponse rapide</span>
+          <span class="prog-pill" style="background:rgba(255,255,255,.08); color:rgba(255,255,255,.7); border-color:rgba(255,255,255,.15);">Sans engagement</span>
+          <span class="prog-pill prog-pill-accent">1re séance découverte</span>
+        </div>
+
+        <p style="font-weight:300; font-size:1rem; color:rgba(255,255,255,.6); line-height:1.8; margin-bottom:2rem;">
+          Séance individuelle : 40€.<br>
+          Séance individuelle de découverte (première) : 20€.<br>
+          Séance de groupe : 15€ par personne.<br>
+        </p>
+
+        <a href="tel:0618504185" class="btn-primary-lg" style="width:fit-content;">Appeler Julian →</a>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:1rem;">
+
+        <a href="tel:0618504185" class="contact-item">
+          <div class="contact-icon" style="background:rgba(121,201,197,.2);">📞</div>
+          <div>
+            <p class="contact-label">Téléphone</p>
+            <p class="contact-value">06 18 50 41 85</p>
+          </div>
+        </a>
+
+        <a href="mailto:julian.ventre@hotmail.fr" class="contact-item">
+          <div class="contact-icon" style="background:rgba(249,110,91,.2);">✉️</div>
+          <div>
+            <p class="contact-label">E-mail</p>
+            <p class="contact-value">julian.ventre@hotmail.fr</p>
+          </div>
+        </a>
+
+        <a href="https://instagram.com/julian_fitness_life" target="_blank" class="contact-item">
+          <div class="contact-icon" style="background:rgba(255,226,175,.15);">📸</div>
+          <div>
+            <p class="contact-label">Instagram</p>
+            <p class="contact-value">@julian_fitness_life</p>
+          </div>
+        </a>
+
+        <div style="background:rgba(255,255,255,.1); border-radius:16px; padding:1.1rem 1.4rem; border:1px solid rgba(255,255,255,.15);" >
+          <p style="font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.35); font-weight:600; margin-bottom:.5rem;">📍 Zone d'intervention</p>
+          <p style="font-size:.9rem; color:rgba(255,255,255,.7); font-weight:300;">À domicile · En extérieur · Paris et ses environs</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ RAINBOW BAR ═══════════ -->
+<div class="rainbow-bar"></div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer style="background:#1a2e35; padding:2rem 2.5rem;">
+  <div class="footer-inner" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+  <p style="font-family:'Archivo Black',sans-serif; color:#fff; font-size:.95rem;">Julian <span style="color:#FFE2AF;">Fitness</span> Life</p>
+  <p style="font-size:.78rem; color:rgba(255,255,255,.35); font-weight:300;">Coach sportif à Vincennes et ses alentours ·  · Sport pour tous · · 06 18 50 41 85</p>
+  <div style="display:flex; gap:1.2rem;">
+    <a href="mailto:julian.ventre@hotmail.fr"style="font-size:.75rem; color:rgba(255,255,255,.4); text-decoration:none; transition:color .2s;" onmouseover="this.style.color='#79C9C5'" onmouseout="this.style.color='rgba(255,255,255,.4)'">Email</a>
+    <a href="https://instagram.com/julian_fitness_life" target="_blank" style="font-size:.75rem; color:rgba(255,255,255,.4); text-decoration:none; transition:color .2s;" onmouseover="this.style.color='#79C9C5'" onmouseout="this.style.color='rgba(255,255,255,.4)'">Instagram</a>
+    <a href="tel:0618504185" style="font-size:.75rem; color:rgba(255,255,255,.4); text-decoration:none; transition:color .2s;" onmouseover="this.style.color='#79C9C5'" onmouseout="this.style.color='rgba(255,255,255,.4)'">Téléphone</a>
+  </div>
+  </div>
+</footer>

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UI Kit — Composants</title>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary:  '#79C9C5',
+            dark:     '#3F9AAE',
+            light:    '#FFE2AF',
+            accent:   '#F96E5B',
+            ink:      '#1a2e35',
+            muted:    '#4a6570',
+          },
+          fontFamily: {
+            display: ['"Archivo Black"', 'sans-serif'],
+            body:    ['Outfit', 'sans-serif'],
+          },
+          borderRadius: {
+            brand: '20px',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Outfit', sans-serif; }
+
+    /* ── Shared transitions ── */
+    .btn { transition: all .2s ease; }
+
+    /* ── Primary button ── */
+    .btn-primary-sm,
+    .btn-primary-md,
+    .btn-primary-lg {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: #79C9C5; color: #fff;
+      font-family: 'Outfit', sans-serif; font-weight: 600;
+      border: none; border-radius: 99px; cursor: pointer;
+      letter-spacing: .02em; white-space: nowrap;
+      transition: all .2s ease;
+    }
+    .btn-primary-sm  { font-size: .78rem; padding: .4rem 1.1rem; }
+    .btn-primary-md  { font-size: .9rem;  padding: .62rem 1.5rem; }
+    .btn-primary-lg  { font-size: 1rem;   padding: .85rem 2rem; }
+    .btn-primary-sm:hover,
+    .btn-primary-md:hover,
+    .btn-primary-lg:hover  { background: #5bb8b3; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(121,201,197,.4); }
+
+    /* ── Secondary button ── */
+    .btn-secondary-sm,
+    .btn-secondary-md,
+    .btn-secondary-lg {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: transparent; color: #79C9C5;
+      font-family: 'Outfit', sans-serif; font-weight: 600;
+      border: 2px solid #79C9C5; border-radius: 99px; cursor: pointer;
+      letter-spacing: .02em; white-space: nowrap;
+      transition: all .2s ease;
+    }
+    .btn-secondary-sm  { font-size: .78rem; padding: .35rem 1rem; }
+    .btn-secondary-md  { font-size: .9rem;  padding: .55rem 1.4rem; }
+    .btn-secondary-lg  { font-size: 1rem;   padding: .78rem 1.9rem; }
+    .btn-secondary-sm:hover,
+    .btn-secondary-md:hover,
+    .btn-secondary-lg:hover { background: rgba(121,201,197,.12); transform: translateY(-1px); }
+
+    /* Secondary on dark bg */
+    .on-dark .btn-secondary-sm,
+    .on-dark .btn-secondary-md,
+    .on-dark .btn-secondary-lg {
+      color: #fff; border-color: rgba(255,255,255,.6);
+    }
+    .on-dark .btn-secondary-sm:hover,
+    .on-dark .btn-secondary-md:hover,
+    .on-dark .btn-secondary-lg:hover { background: rgba(255,255,255,.12); border-color: #fff; }
+
+    /* ── Section label ── */
+    .section-label {
+      display: inline-flex; align-items: center; gap: .7rem;
+      font-family: 'Outfit', sans-serif; font-size: .7rem;
+      font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+      color: #3F9AAE;
+    }
+    .section-label::before {
+      content: ''; display: block;
+      width: 28px; height: 2px; background: #79C9C5; border-radius: 99px;
+      flex-shrink: 0;
+    }
+    .section-label.on-dark-label { color: #79C9C5; }
+    .section-label.on-dark-label::before { background: #79C9C5; }
+
+    /* ── Card ── */
+    .ui-card {
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,.07);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .ui-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 40px rgba(0,0,0,.13);
+    }
+    .ui-card-img {
+      width: 100%; aspect-ratio: 4/3; object-fit: cover;
+      display: block; background: #e8e4de;
+    }
+    .ui-card-body { padding: 1.4rem 1.5rem 1.7rem; }
+    .ui-card-tag {
+      font-size: .67rem; letter-spacing: .12em; text-transform: uppercase;
+      font-weight: 600; color: #F96E5B; font-family: 'Outfit', sans-serif;
+      margin-bottom: .55rem; display: block;
+    }
+    .ui-card-title {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 1.05rem; color: #1a2e35; line-height: 1.25;
+      margin-bottom: .6rem;
+    }
+    .ui-card-desc {
+      font-family: 'Outfit', sans-serif; font-size: .87rem;
+      color: #4a6570; line-height: 1.65; font-weight: 300;
+    }
+    .ui-card-footer {
+      padding: 0 1.5rem 1.4rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .ui-card-footer .card-link {
+      font-family: 'Outfit', sans-serif; font-size: .82rem;
+      font-weight: 600; color: #3F9AAE;
+      text-decoration: none; display: inline-flex; align-items: center; gap: .3rem;
+      transition: gap .2s;
+    }
+    .ui-card-footer .card-link:hover { gap: .6rem; }
+
+    /* ── Trust bar ── */
+    .trust-item {
+      display: flex; align-items: flex-start; gap: .9rem;
+      padding: .2rem 0;
+    }
+    .trust-bar-line {
+      width: 3px; height: 44px; border-radius: 99px;
+      flex-shrink: 0; margin-top: .1rem;
+    }
+    .trust-text-title {
+      font-family: 'Outfit', sans-serif; font-size: .88rem;
+      font-weight: 700; color: #1a2e35; line-height: 1.2;
+      margin-bottom: .18rem;
+    }
+    .trust-text-sub {
+      font-family: 'Outfit', sans-serif; font-size: .78rem;
+      color: #4a6570; font-weight: 300; line-height: 1.4;
+    }
+    /* dark trust */
+    .trust-dark .trust-text-title { color: #fff; }
+    .trust-dark .trust-text-sub   { color: rgba(255,255,255,.55); }
+
+    /* ── Anatomy chip ── */
+    .chip {
+      display: inline-block; font-size: .65rem; letter-spacing: .1em;
+      text-transform: uppercase; font-weight: 600; padding: .2rem .6rem;
+      border-radius: 6px; background: rgba(63,154,174,.1); color: #3F9AAE;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* ── Component section header ── */
+    .comp-header {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 1.4rem; color: #1a2e35;
+      display: flex; align-items: center; gap: .8rem;
+    }
+    .comp-header::after {
+      content: ''; flex: 1; height: 1px; background: rgba(0,0,0,.08);
+    }
+
+    /* Placeholder image SVG backgrounds */
+    .img-placeholder-1 { background: linear-gradient(135deg, #79C9C5 0%, #3F9AAE 100%); }
+    .img-placeholder-2 { background: linear-gradient(135deg, #FFE2AF 0%, #F9C97B 100%); }
+    .img-placeholder-3 { background: linear-gradient(135deg, #F96E5B 0%, #e05040 100%); }
+  </style>
+</head>
+<body class="bg-[#f7f4ef] text-ink min-h-screen">
+
+<!-- ──────────── HEADER ──────────── -->
+<header class="bg-dark px-12 py-16 relative overflow-hidden">
+  <div class="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-primary opacity-20"></div>
+  <div class="absolute -bottom-10 left-20 w-36 h-36 rounded-full bg-accent opacity-15"></div>
+  <p class="section-label on-dark-label mb-5">Charte graphique</p>
+  <h1 class="font-display text-white text-5xl leading-tight max-w-lg">UI Kit</h1>
+  <p class="text-white/60 mt-3 font-light text-base max-w-md leading-relaxed">
+    Composants prêts à l'emploi. Archivo Black · Outfit · Variables de couleur brand.
+  </p>
+</header>
+
+<!-- ──────────── MAIN ──────────── -->
+<main class="max-w-5xl mx-auto px-6 py-20 space-y-24">
+
+
+  <!-- ═══════════════════════════════════
+       1. BOUTONS
+  ═══════════════════════════════════ -->
+  <section>
+    <h2 class="comp-header mb-10">Boutons</h2>
+
+    <!-- Fond clair -->
+    <div class="bg-white rounded-brand p-8 shadow-sm mb-4">
+      <p class="chip mb-6">Sur fond clair</p>
+
+      <!-- Primary -->
+      <div class="mb-8">
+        <p class="text-xs uppercase tracking-widest text-muted font-semibold mb-4">Primary</p>
+        <div class="flex flex-wrap items-center gap-4">
+          <button class="btn-primary-sm">Découvrir →</button>
+          <button class="btn-primary-md">Voir la collection →</button>
+          <button class="btn-primary-lg">Explorer l'été →</button>
+        </div>
+      </div>
+
+      <!-- Secondary -->
+      <div>
+        <p class="text-xs uppercase tracking-widest text-muted font-semibold mb-4">Secondary</p>
+        <div class="flex flex-wrap items-center gap-4">
+          <button class="btn-secondary-sm">En savoir plus</button>
+          <button class="btn-secondary-md">Voir plus</button>
+          <button class="btn-secondary-lg">Toute la collection</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fond sombre -->
+    <div class="bg-dark rounded-brand p-8 on-dark">
+      <p class="chip mb-6" style="background:rgba(255,255,255,.12);color:rgba(255,255,255,.7);">Sur fond sombre</p>
+
+      <!-- Primary -->
+      <div class="mb-8">
+        <p class="text-xs uppercase tracking-widest text-white/40 font-semibold mb-4">Primary</p>
+        <div class="flex flex-wrap items-center gap-4">
+          <button class="btn-primary-sm">Découvrir →</button>
+          <button class="btn-primary-md">Voir la collection →</button>
+          <button class="btn-primary-lg">Explorer l'été →</button>
+        </div>
+      </div>
+
+      <!-- Secondary -->
+      <div>
+        <p class="text-xs uppercase tracking-widest text-white/40 font-semibold mb-4">Secondary</p>
+        <div class="flex flex-wrap items-center gap-4">
+          <button class="btn-secondary-sm">En savoir plus</button>
+          <button class="btn-secondary-md">Voir plus</button>
+          <button class="btn-secondary-lg">Toute la collection</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Anatomie -->
+    <div class="mt-5 bg-white rounded-2xl px-6 py-4 shadow-sm flex flex-wrap gap-6 text-sm text-muted">
+      <span><span class="chip">Primary</span> — fond <code class="text-dark font-mono text-xs">--primary</code>, texte blanc, hover assombri</span>
+      <span><span class="chip">Secondary</span> — outline <code class="text-dark font-mono text-xs">--primary</code>, hover fill léger</span>
+      <span><span class="chip">On dark</span> — outline blanc 60%, hover fill blanc 12%</span>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════
+       2. TRUST BAR
+  ═══════════════════════════════════ -->
+  <section>
+    <h2 class="comp-header mb-10">Trust Bar</h2>
+
+    <!-- Fond clair -->
+    <div class="bg-white rounded-brand p-8 shadow-sm mb-4">
+      <p class="chip mb-7">Sur fond clair</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+
+        <div class="trust-item">
+          <div class="trust-bar-line" style="background:#79C9C5;"></div>
+          <div>
+            <p class="trust-text-title">Livraison offerte</p>
+            <p class="trust-text-sub">Dès 60 € d'achat, partout en France</p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <div class="trust-bar-line" style="background:#F96E5B;"></div>
+          <div>
+            <p class="trust-text-title">Retours 30 jours</p>
+            <p class="trust-text-sub">Sans question, sans frais cachés</p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <div class="trust-bar-line" style="background:#3F9AAE;"></div>
+          <div>
+            <p class="trust-text-title">Paiement sécurisé</p>
+            <p class="trust-text-sub">Données cryptées, 100 % protégées</p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <div class="trust-bar-line" style="background:#FFE2AF;"></div>
+          <div>
+            <p class="trust-text-title">Service client</p>
+            <p class="trust-text-sub">Disponible 7j/7 de 9h à 19h</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Fond sombre -->
+    <div class="bg-dark rounded-brand p-8 trust-dark">
+      <p class="chip mb-7" style="background:rgba(255,255,255,.12);color:rgba(255,255,255,.7);">Sur fond sombre</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+
+        <div class="trust-item">
+          <div class="trust-bar-line" style="background:#79C9C5;"></div>
+          <div>
+            <p class="trust-text-title">Livraison offerte</p>
+            <p class="trust-text-sub">Dès 60 € d'achat, partout en France</p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <div class="trust-bar-line" style="background:#F96E5B;"></div>
+          <div>
+            <p class="trust-text-title">Retours 30 jours</p>
+            <p class="trust-text-sub">Sans question, sans frais cachés</p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <div class="trust-bar-line" style="background:#79C9C5; opacity:.5;"></div>
+          <div>
+            <p class="trust-text-title">Paiement sécurisé</p>
+            <p class="trust-text-sub">Données cryptées, 100 % protégées</p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <div class="trust-bar-line" style="background:#FFE2AF;"></div>
+          <div>
+            <p class="trust-text-title">Service client</p>
+            <p class="trust-text-sub">Disponible 7j/7 de 9h à 19h</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════
+       3. LABEL DE SECTION
+  ═══════════════════════════════════ -->
+  <section>
+    <h2 class="comp-header mb-10">Label de section</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+      <!-- Sur fond clair -->
+      <div class="bg-white rounded-brand p-8 shadow-sm space-y-8">
+        <p class="chip mb-2">Sur fond clair</p>
+
+        <div>
+          <span class="section-label">Nos nouveautés</span>
+          <h3 class="font-display text-2xl text-ink mt-3 leading-tight">L'été commence ici</h3>
+          <p class="text-muted text-sm font-light mt-2 leading-relaxed">Suivi d'un titre Archivo Black — l'association type.</p>
+        </div>
+
+        <div>
+          <span class="section-label">Collections</span>
+          <h3 class="font-display text-2xl text-ink mt-3 leading-tight">Découvrez notre univers</h3>
+        </div>
+
+        <div>
+          <span class="section-label">À propos</span>
+          <h3 class="font-display text-2xl text-ink mt-3 leading-tight">Notre histoire, vos étés</h3>
+        </div>
+      </div>
+
+      <!-- Sur fond sombre -->
+      <div class="bg-dark rounded-brand p-8 space-y-8">
+        <p class="chip mb-2" style="background:rgba(255,255,255,.12);color:rgba(255,255,255,.7);">Sur fond sombre</p>
+
+        <div>
+          <span class="section-label on-dark-label">Nos nouveautés</span>
+          <h3 class="font-display text-2xl text-white mt-3 leading-tight">L'été commence ici</h3>
+          <p class="text-white/50 text-sm font-light mt-2 leading-relaxed">Contraste parfait sur dark background.</p>
+        </div>
+
+        <div>
+          <span class="section-label on-dark-label">Collections</span>
+          <h3 class="font-display text-2xl text-white mt-3 leading-tight">Découvrez notre univers</h3>
+        </div>
+
+        <div>
+          <span class="section-label on-dark-label">À propos</span>
+          <h3 class="font-display text-2xl text-white mt-3 leading-tight">Notre histoire, vos étés</h3>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Anatomie -->
+    <div class="mt-4 bg-white rounded-2xl px-6 py-4 shadow-sm text-sm text-muted flex flex-wrap gap-4">
+      <span><span class="chip">Trait</span> — 28px · 2px · <code class="text-dark font-mono text-xs">--primary</code></span>
+      <span><span class="chip">Texte</span> — Outfit 600 · 0.7rem · tracking 0.2em · uppercase</span>
+      <span><span class="chip">Couleur</span> — <code class="text-dark font-mono text-xs">--dark</code> sur clair · <code class="text-dark font-mono text-xs">--primary</code> sur sombre</span>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════
+       4. CARTES
+  ═══════════════════════════════════ -->
+  <section>
+    <h2 class="comp-header mb-10">Cartes</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+
+      <!-- Carte 1 -->
+      <div class="ui-card">
+        <div class="ui-card-img img-placeholder-1 flex items-center justify-center">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="23" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+            <path d="M14 30l7-8 5 6 3-4 5 6H14z" fill="rgba(255,255,255,0.3)"/>
+            <circle cx="31" cy="18" r="3" fill="rgba(255,255,255,0.4)"/>
+          </svg>
+        </div>
+        <div class="ui-card-body">
+          <span class="ui-card-tag">Collection</span>
+          <h3 class="ui-card-title">Aquarelle Côtière</h3>
+          <p class="ui-card-desc">Des teintes océaniques pour habiller votre quotidien de la fraîcheur de l'été.</p>
+        </div>
+        <div class="ui-card-footer">
+          <a href="#" class="card-link">Voir la collection <span>→</span></a>
+          <span class="text-xs text-muted font-light">12 pièces</span>
+        </div>
+      </div>
+
+      <!-- Carte 2 -->
+      <div class="ui-card">
+        <div class="ui-card-img img-placeholder-2 flex items-center justify-center">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="23" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+            <path d="M24 12c-3.3 0-6 2.7-6 6s6 10 6 10 6-6.7 6-10-2.7-6-6-6z" fill="rgba(255,255,255,0.4)"/>
+            <circle cx="24" cy="18" r="2.5" fill="rgba(255,255,255,0.7)"/>
+          </svg>
+        </div>
+        <div class="ui-card-body">
+          <span class="ui-card-tag">Nouveauté</span>
+          <h3 class="ui-card-title">Sable Doré</h3>
+          <p class="ui-card-desc">La chaleur des dunes capturée dans une gamme de tons ensoleillés et enveloppants.</p>
+        </div>
+        <div class="ui-card-footer">
+          <a href="#" class="card-link">Découvrir <span>→</span></a>
+          <span class="text-xs text-muted font-light">8 pièces</span>
+        </div>
+      </div>
+
+      <!-- Carte 3 -->
+      <div class="ui-card">
+        <div class="ui-card-img img-placeholder-3 flex items-center justify-center">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="23" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+            <path d="M18 34c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="24" cy="20" r="5" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="ui-card-body">
+          <span class="ui-card-tag">Exclusif</span>
+          <h3 class="ui-card-title">Soleil Couchant</h3>
+          <p class="ui-card-desc">Les teintes vives du crépuscule pour des tenues qui font vibrer chaque soirée estivale.</p>
+        </div>
+        <div class="ui-card-footer">
+          <a href="#" class="card-link">Explorer <span>→</span></a>
+          <span class="text-xs text-muted font-light">5 pièces</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Anatomie -->
+    <div class="mt-5 bg-white rounded-2xl px-6 py-4 shadow-sm text-sm text-muted flex flex-wrap gap-4">
+      <span><span class="chip">Image</span> — ratio 4:3 · object-fit cover</span>
+      <span><span class="chip">Tag</span> — Outfit 600 · accent color · uppercase</span>
+      <span><span class="chip">Titre</span> — Archivo Black · 1.05rem</span>
+      <span><span class="chip">Description</span> — Outfit 300 · muted</span>
+      <span><span class="chip">Lien</span> — couleur dark · hover décale →</span>
+    </div>
+  </section>
+
+
+</main>
+
+<!-- ──────────── FOOTER ──────────── -->
+<footer class="bg-dark text-white/50 text-center py-8 text-xs tracking-widest">
+  <strong class="text-white/90">UI Kit</strong> · Composants · Archivo Black + Outfit
+</footer>
+
+</body>
+</html>

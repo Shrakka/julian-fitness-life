@@ -1,0 +1,35 @@
+Crée un fichier brand-book.html avec ma charte graphique.
+
+Je veux 4 couleurs principales. Pour chacune, affiche : le nom, le code hex, le rgb, la variable CSS correspondante (ex: --primary, --dark, --light, --accent), et son rôle dans le site.
+
+Les rôles à couvrir au minimum :
+
+- Primary #79C9C5 : couleur de marque, boutons, CTA
+- Dark  #3F9AAE : fonds sombres (hero, footer)
+- Light #FFE2AF : fonds clairs, backgrounds de section
+- Accent #F96E5B : highlights, labels, éléments de différenciation
+
+Mes couleurs rappellent l'été.
+Le style du fichier doit être clean et aéré.
+
+
+
+Ajoute à mon brand-book.html une section typographies.
+
+J'utilise 2 familles de typo, toutes disponibles sur Google Fonts :
+
+- Archivo Black pour les titres, logos...
+- Outfit pour le reste
+
+Archivo Black doit être épais pour les titres entre autre, avec une taille adaptée à chaque titre.
+
+Pour t'aider, voici les imports :
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+</style>
+
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Outfit:wght@100..900&display=swap');
+</style>
