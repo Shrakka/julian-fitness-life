@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Carte de Visite — Julian Fitness Life</title>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #79C9C5;
+      --dark:    #3F9AAE;
+      --light:   #FFE2AF;
+      --accent:  #F96E5B;
+      --ink:     #1a2e35;
+      --muted:   #4a6570;
+    }
+
+    @page {
+      size: 85mm 55mm;
+      margin: 0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #d6d2cc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+      padding: 44px 24px 48px;
+    }
+
+    .preview-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 10px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: #999;
+      font-weight: 500;
+      width: 85mm;
+      text-align: left;
+      margin-bottom: -16px;
+    }
+
+    @media print {
+      .preview-label { display: none; }
+      body { background: none; padding: 0; gap: 0; }
+    }
+
+    /* ── Card base ── */
+    .card {
+      width: 85mm;
+      height: 55mm;
+      position: relative;
+      overflow: hidden;
+      border-radius: 2mm;
+      flex-shrink: 0;
+      box-shadow: 0 4px 24px rgba(0,0,0,.18);
+    }
+
+    @media print {
+      .card { border-radius: 0; box-shadow: none; page-break-after: always; }
+      .card:last-of-type { page-break-after: auto; }
+    }
+
+    /* ══════════════════════════════
+       RECTO
+    ══════════════════════════════ */
+    .recto { background: var(--dark); }
+
+    .recto-blob1 {
+      position: absolute;
+      top: -14mm; right: -12mm;
+      width: 42mm; height: 42mm;
+      border-radius: 50%;
+      background: var(--primary);
+      opacity: .2;
+    }
+    .recto-blob2 {
+      position: absolute;
+      bottom: -10mm; left: -8mm;
+      width: 30mm; height: 30mm;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: .15;
+    }
+
+    .recto-bar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3mm;
+      background: linear-gradient(90deg, var(--accent), var(--light) 50%, var(--primary));
+    }
+
+    .recto-content {
+      position: relative; z-index: 2;
+      width: 100%; height: 100%;
+      padding: 6mm 7mm 7mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .recto-eyebrow {
+      font-family: 'Outfit', sans-serif;
+      font-size: 4.8pt;
+      font-weight: 500;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--light);
+      opacity: .8;
+      margin-bottom: 2.5mm;
+    }
+
+    .recto-name {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 16pt;
+      color: #fff;
+      line-height: 1.0;
+      letter-spacing: -.01em;
+    }
+    .recto-name span { color: var(--light); }
+
+    .recto-services {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    .recto-service {
+      font-family: 'Outfit', sans-serif;
+      font-size: 4pt;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.75);
+    }
+    .recto-sep {
+      font-size: 5pt;
+      color: var(--accent);
+      margin: 0 1.8mm;
+      font-weight: 300;
+    }
+
+
+    /* ══════════════════════════════
+       VERSO
+    ══════════════════════════════ */
+    .verso { background: #f7f4ef; }
+
+    .verso-circle {
+      position: absolute;
+      top: -18mm; right: -18mm;
+      width: 52mm; height: 52mm;
+      border-radius: 50%;
+      border: 7mm solid var(--light);
+      opacity: .5;
+    }
+    .verso-circle2 {
+      position: absolute;
+      bottom: -9mm; left: -9mm;
+      width: 28mm; height: 28mm;
+      border-radius: 50%;
+      background: var(--primary);
+      opacity: .1;
+    }
+    .verso-topbar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2.5mm;
+      background: linear-gradient(90deg, var(--dark), var(--primary) 60%, var(--light));
+    }
+
+    .verso-content {
+      position: relative; z-index: 2;
+      width: 100%; height: 100%;
+      padding: 6mm 7mm 6mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .verso-name {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 7.5pt;
+      color: var(--dark);
+      letter-spacing: .01em;
+      margin-bottom: 2mm;
+      margin-top: 1mm;
+    }
+
+    .verso-divider {
+      width: 10mm; height: .6mm;
+      background: linear-gradient(90deg, var(--accent), var(--primary));
+      border-radius: 99px;
+      margin-bottom: 3mm;
+    }
+
+    .verso-row {
+      display: flex;
+      align-items: baseline;
+      gap: 2mm;
+      margin-bottom: 1.8mm;
+    }
+    .verso-row:last-of-type { margin-bottom: 0; }
+
+    .verso-row-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 3.5pt;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      min-width: 9mm;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .verso-row-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 5.8pt;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+    .verso-row-value.bold { font-weight: 600; }
+
+    .verso-footer {
+      margin-top: 3mm;
+      padding-top: 2mm;
+      border-top: .4mm solid rgba(0,0,0,.07);
+      display: flex;
+      align-items: center;
+      gap: 2mm;
+    }
+    .verso-footer-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: 3.8pt;
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: .06em;
+    }
+    .verso-footer-dot {
+      width: 1mm; height: 1mm;
+      border-radius: 50%;
+      background: var(--primary);
+      flex-shrink: 0;
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ══════ RECTO ══════ -->
+<p class="preview-label">Recto</p>
+<div class="card recto">
+  <div class="recto-blob1"></div>
+  <div class="recto-blob2"></div>
+  <div class="recto-bar"></div>
+
+  <div class="recto-content">
+
+    <div>
+      <p class="recto-eyebrow">Coach Sportif Certifié · Vincennes et ses environs</p>
+      <p class="recto-name"><br>Julian <br><span>Fitness</span> Life</p>
+    </div>
+
+    <div>
+      <div class="recto-services">
+        <span class="recto-service">Remise en forme</span>
+        <span class="recto-sep">·</span>
+        <span class="recto-service">Renforcement</span>
+        <span class="recto-sep">·</span>
+        <span class="recto-service">Perfectionnement</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════ VERSO ══════ -->
+<p class="preview-label">Verso</p>
+<div class="card verso">
+  <div class="verso-circle"></div>
+  <div class="verso-circle2"></div>
+  <div class="verso-topbar"></div>
+
+  <div class="verso-content">
+
+    <p class="verso-name">Julian Fitness Life</p>
+    <div class="verso-divider"></div>
+
+    <div class="verso-row">
+      <span class="verso-row-label">Web</span>
+      <span class="verso-row-value bold">julianfitnesslife.fr</span>
+    </div>
+
+    <div class="verso-row">
+      <span class="verso-row-label">Tél.</span>
+      <span class="verso-row-value">06 18 50 41 85</span>
+    </div>
+
+    <div class="verso-row">
+      <span class="verso-row-label">Mail</span>
+      <span class="verso-row-value">julian.ventre@hotmail.fr</span>
+    </div>
+
+    <div class="verso-row">
+      <span class="verso-row-label">Insta</span>
+      <span class="verso-row-value">@julian_fitness_life</span>
+    </div>
+
+    <div class="verso-row">
+      <span class="verso-row-label">Format</span>
+      <span class="verso-row-value">Séances individuelles et de groupe</span>
+    </div>
+
+    <div class="verso-footer">
+      <span class="verso-footer-text">Certifié Instructeur Fitness</span>
+      <div class="verso-footer-dot"></div>
+      <span class="verso-footer-text">Vincennes et ses environs</span>
+      <div class="verso-footer-dot"></div>
+      <span class="verso-footer-text">Sport pour tous</span>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
