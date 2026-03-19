@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Julian Fitness Life — Coach Sportif à Vincennes et ses alentours</title>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   
   <style>
@@ -337,11 +338,11 @@
         le sport est fait pour vous. Julian vous accompagne avec bienveillance,
         technique et bonne humeur.
       </p>
+      <br>
       <p>
-        Sur Paris et ses environs, à domicile ou en extérieur.<br class="hidden md:flex">
-        Certifié <em>Instructeur Fitness</em> par Jobifit.
-      </p>
-      <p>
+        Sur Paris et ses environs, à domicile ou en extérieur.
+        <br class="hidden md:flex">
+        Certifié <em>Instructeur Fitness</em> (CQP).
       </p>
     </div>
 
@@ -360,10 +361,12 @@
     </svg>
     Défiler
   </div>
+
 </div>
 
 <!-- ═══════════ TRUST BAR ═══════════ -->
 <section class="trust-section" style="padding: 3rem 2.5rem; background: #fff;">
+  <h2 class="hidden">Mes indicateurs</h2>
   <div class="section-inner">
     <div class="trust-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 2rem;">
 
@@ -378,7 +381,7 @@
       <div class="trust-item">
         <div class="trust-bar-line" style="background:#F96E5B;"></div>
         <div>
-          <p class="trust-title">100 % inclusif</p>
+          <p class="trust-title" id="inclusif">100 % inclusif</p>
           <p class="trust-sub">LGBT friendly, sans jugement, bienveillant</p>
         </div>
       </div>
@@ -668,7 +671,9 @@
         </a>
 
         <a href="mailto:julian.ventre@hotmail.fr" class="contact-item">
-          <div class="contact-icon" style="background:rgba(249,110,91,.2);">✉️</div>
+          <div class="contact-icon" style="background:rgba(249,110,91,.2);">
+            ✉️
+          </div>
           <div>
             <p class="contact-label">E-mail</p>
             <p class="contact-value">julian.ventre@hotmail.fr</p>
@@ -676,7 +681,9 @@
         </a>
 
         <a href="https://instagram.com/julian_fitness_life" target="_blank" class="contact-item">
-          <div class="contact-icon" style="background:rgba(255,226,175,.15);"><?xml version="1.0" encoding="UTF-8"?><svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#fff"><path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16Z" stroke="#fff" stroke-width="1.5"></path><path d="M17.5 6.51L17.51 6.49889" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+          <div class="contact-icon" style="background:rgba(255,226,175,.15);">
+            <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#fff"><path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16Z" stroke="#fff" stroke-width="1.5"></path><path d="M17.5 6.51L17.51 6.49889" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
           <div>
             <p class="contact-label">Instagram</p>
             <p class="contact-value">@julian_fitness_life</p>
@@ -702,7 +709,7 @@
   <p style="font-family:'Archivo Black',sans-serif; color:#fff; font-size:.95rem;">Julian <span style="color:#FFE2AF;">Fitness</span> Life</p>
   <p style="font-size:.78rem; color:rgba(255,255,255,.35); font-weight:300;">Coach sportif certifié à Vincennes et ses alentours</p>
   <div style="display:flex; gap:1.2rem;">
-    <a href="mailto:julian.ventre@hotmail.fr"style="font-size:.75rem; color:rgba(255,255,255,.4); text-decoration:none; transition:color .2s;" onmouseover="this.style.color='#79C9C5'" onmouseout="this.style.color='rgba(255,255,255,.4)'">Email</a>
+    <a href="mailto:julian.ventre@hotmail.fr" style="font-size:.75rem; color:rgba(255,255,255,.4); text-decoration:none; transition:color .2s;" onmouseover="this.style.color='#79C9C5'" onmouseout="this.style.color='rgba(255,255,255,.4)'">Email</a>
     <a href="https://instagram.com/julian_fitness_life" target="_blank" style="font-size:.75rem; color:rgba(255,255,255,.4); text-decoration:none; transition:color .2s;" onmouseover="this.style.color='#79C9C5'" onmouseout="this.style.color='rgba(255,255,255,.4)'">Instagram</a>
     <a href="tel:0618504185" style="font-size:.75rem; color:rgba(255,255,255,.4); text-decoration:none; transition:color .2s;" onmouseover="this.style.color='#79C9C5'" onmouseout="this.style.color='rgba(255,255,255,.4)'">Téléphone</a>
   </div>
